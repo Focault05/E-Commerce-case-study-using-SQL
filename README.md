@@ -45,9 +45,9 @@
 - This metric can help in identifying which channels are working well without promo spend( eg: SEO, word of mouth, social networking sites etc)
  
  -- 𝗞𝗲𝘆 𝗟𝗲𝗮𝗿𝗻𝗶𝗻𝗴𝘀:
-✅ 𝑫𝒂𝒕𝒂 𝑹𝒆𝒕𝒓𝒊𝒆𝒗𝒂𝒍: SELECT, WHERE, DISTINCT, LIKE
-✅ 𝑺𝒐𝒓𝒕𝒊𝒏𝒈 & 𝑭𝒊𝒍𝒕𝒆𝒓𝒊𝒏𝒈: GROUP BY, ORDER BY, LIMIT, OFFSET
-✅ 𝑨𝒈𝒈𝒓𝒆𝒈𝒂𝒕𝒊𝒐𝒏 𝑭𝒖𝒏𝒄𝒕𝒊𝒐𝒏𝒔: SUM, COUNT, MIN, MAX, AVG, GROUP BY, HAVING
-✅ 𝑼𝒏𝒗𝒆𝒊𝒍𝒊𝒏𝒈 𝑹𝒆𝒍𝒂𝒕𝒊𝒐𝒏𝒔𝒉𝒊𝒑𝒔: JOINS, Subqueries, Correlated Subqueries
-✅ 𝑨𝒅𝒗𝒂𝒏𝒄𝒆𝒅 𝑨𝒏𝒂𝒍𝒚𝒕𝒊𝒄𝒔: CASE, YEAR, CURYEAR, IF, CTEs, User Defined Functions, Windows Functions
-✅ 𝑫𝒂𝒕𝒂𝒃𝒂𝒔𝒆 𝑴𝒂𝒏𝒂𝒈𝒆𝒎𝒆𝒏𝒕: DDL, DML, Data Types, Views.
+- ✅ 𝑫𝒂𝒕𝒂 𝑹𝒆𝒕𝒓𝒊𝒆𝒗𝒂𝒍: SELECT, WHERE, DISTINCT, LIKE
+- ✅ 𝑺𝒐𝒓𝒕𝒊𝒏𝒈 & 𝑭𝒊𝒍𝒕𝒆𝒓𝒊𝒏𝒈: GROUP BY, ORDER BY, LIMIT, OFFSET
+- ✅ 𝑨𝒈𝒈𝒓𝒆𝒈𝒂𝒕𝒊𝒐𝒏 𝑭𝒖𝒏𝒄𝒕𝒊𝒐𝒏𝒔: SUM, COUNT, MIN, MAX, AVG, GROUP BY, HAVING
+- ✅ 𝑼𝒏𝒗𝒆𝒊𝒍𝒊𝒏𝒈 𝑹𝒆𝒍𝒂𝒕𝒊𝒐𝒏𝒔𝒉𝒊𝒑𝒔: JOINS, Subqueries, Correlated Subqueries
+- ✅ 𝑨𝒅𝒗𝒂𝒏𝒄𝒆𝒅 𝑨𝒏𝒂𝒍𝒚𝒕𝒊𝒄𝒔: CASE, YEAR, CURYEAR, IF, CTEs, User Defined Functions, Windows Functions
+- ✅ 𝑫𝒂𝒕𝒂𝒃𝒂𝒔𝒆 𝑴𝒂𝒏𝒂𝒈𝒆𝒎𝒆𝒏𝒕: DDL, DML, Data Types, Views.
