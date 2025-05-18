@@ -1,0 +1,102 @@
+-- 1. find top 3 outlets by cuisine type without using limit and top function
+-- we do not have revenue column , so by getting no. of orders placed of each cusine in each restaurant we can get the answer
+
+use food_orders;
+
+WITH CTE AS (
+SELECT Cuisine, Restaurant_id, COUNT(*) as no_of_orders
+FROM orders
+GROUP BY Cuisine, Restaurant_id)
+SELECT * FROM (SELECT *,
+row_number() OVER(partition by Cuisine order by no_of_orders desc) as rn
+FROM CTE) rest
+where rn = 1 ;
+
+-- due to less data we cannot get top 3 here
+-- if had then, rn<=3
+
+
+-- 2. find the daily new customer count starting from the launch date( everyday how many new customers are we acquiring)
+-- for each customer when did he placed his first order 
+-- now count how many customers are there for each first_order_date
+
+with cte as(
+SELECT Customer_code,cast(MIN(Placed_at)as date) as first_order_date
+from orders
+group by Customer_code)
+
+SELECT first_order_Date, COUNT(*) as new_customers
+from cte
+group by first_order_date
+order by first_order_date
+
+
+;
+
+
+
+-- 3. Count of all the users who were acquired in Jan 2025 ,only placed one order in Jan and did not placed any order further.
+-- (means ordered only once in the database that too in Jan and only one order)
+
+
+
+SELECT Customer_code, count(*) as no_of_orders
+from orders
+where MONTH(Placed_at)=1 and YEAR(Placed_at)= 2025
+and Customer_code not in (SELECT distinct Customer_code
+from orders
+where not  MONTH(Placed_at)=1 and YEAR(Placed_at)= 2025)
+group by Customer_code
+having count(*) = 1;
+
+
+
+-- 4 . List all customers with no order in last 7 days but were acquired one month ago with their first order on promo.
+with cte as (
+SELECT Customer_code, Min(Placed_at) as first_order_date,
+Max(Placed_at) as last_order_date
+from orders
+group by Customer_code)
+SELECT cte.*,
+orders.Promo_code_Name as first_order_promo
+ FROM cte
+inner join orders on cte.Customer_code = orders.Customer_code
+and cte.first_order_date = orders.Placed_at
+where last_order_date < date_add(NOW(), INTERVAL -7 DAY) -- date of today - 7 days
+and first_order_date  < date_add(NOW(), INTERVAL -1 MONTH) and orders.Promo_code_Name is not null;
+
+
+-- 5. growth team is planning to create a trigger that will target customers after their evry third order with a 
+-- personalised communication and they have asked you to create a query for this.
+-- Considering that the query will be run by growth team each unique day , we have to check whether 
+-- 3rd order is placed on that end of day 
+-- in this way we will not send promotion messg again and again
+with cte as(select *,
+row_number() OVER(PARTITION BY Customer_code ORDER BY Placed_at) as order_no
+from orders)
+select * 
+from cte
+where order_no % 3=0 
+and DATE(Placed_at) = current_date();
+
+
+
+-- 6. List all customers who placed more than 1 order and all their orders on a promo code only
+select Customer_code, COUNT(*) as no_of_orders, COUNT(Promo_code_Name) as total_promo_orders
+from orders
+group by Customer_code
+having COUNT(*) > 1 and COUNT(*) = COUNT(Promo_code_Name) ;
+
+
+
+-- 7. what % of customers were organically acquired in Jan 2025( placed their first order without using promo code)
+with cte as 
+(select * , 
+ROW_NUMBER() over (partition by CUSTOMER_CODE order by Placed_at) as rn 
+from orders
+where month(Placed_at) = 1 and YEAR(Placed_at) = 2025)
+SELECT count(case when rn = 1 and Promo_code_Name is null then customer_code end)* 100.0/count(distinct Customer_code)
+FROM cte ;
+
+
+
